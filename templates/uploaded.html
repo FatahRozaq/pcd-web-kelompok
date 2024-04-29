@@ -156,6 +156,30 @@
                   <!-- Tambahkan submenu lainnya di sini sesuai kebutuhan -->
               </ul>
             </li>
+            <li>
+              <a href="#"><span class="fa fa-user mr-3"></span>Morfologi</a>
+              <ul class="list-unstyled components">
+                  <li>
+                      <form id="" action="{{ url_for('edge_detection') }}" method="POST" enctype="multipart/form-data">
+                          <button type="submit" class="btn btn-primary">Dilasi</button>
+                      </form>
+                  </li>
+                  <li>
+                      <form id="" action="{{ url_for('erosi') }}" method="POST" enctype="multipart/form-data">
+                          <button type="submit" class="btn btn-primary">Erosi</button>
+                      </form>
+                    </li>
+                    <li>
+                      <form id="" action="{{ url_for('sharpening') }}" method="POST" enctype="multipart/form-data">
+                          <button type="submit" class="btn btn-primary">Opening</button>
+                      </form>
+                    </li>
+                    <form id="" action="{{ url_for('sharpening') }}" method="POST" enctype="multipart/form-data">
+                      <button type="submit" class="btn btn-primary">Closing</button>
+                  </form>
+                  <!-- Tambahkan submenu lainnya di sini sesuai kebutuhan -->
+              </ul>
+            </li>
             <!-- Di dalam list-unstyled components -->
 <li>
   <a href="#"><span class="fa fa-user mr-3"></span>Segmentasi</a>
