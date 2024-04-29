@@ -147,14 +147,32 @@
                           <button type="submit" class="btn btn-primary">Sharpening</button>
                       </form>
                     </li>
-                    <li>
-                      <form id="" action="{{ url_for('brightness_substraction') }}" method="POST" enctype="multipart/form-data">
-                          <button type="submit" class="btn btn-primary">Gelap (-)</button>
-                      </form>
-                    </li>
                   <!-- Tambahkan submenu lainnya di sini sesuai kebutuhan -->
               </ul>
             </li>
+            <!-- Di dalam list-unstyled components -->
+<li>
+  <a href="#"><span class="fa fa-user mr-3"></span>Segmentasi</a>
+  <ul class="list-unstyled components">
+      <li>
+          <form id="" action="{{ url_for('thresholding') }}" method="POST" enctype="multipart/form-data">
+              <div class="form-group">
+                  <label for="lower_thres">Batas Bawah:</label>
+                  <input type="number" name="lower_thres" id="lower_thres" class="form-control" placeholder="0-255">
+              </div>
+              <div class="form-group">
+                  <label for="upper_thres">Batas Atas:</label>
+                  <input type="number" name="upper_thres" id="upper_thres" class="form-control" placeholder="0-255">
+              </div>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Thresholding</button>
+              </div>
+          </form>
+      </li>
+      <!-- Tambahkan submenu lainnya di sini sesuai kebutuhan -->
+  </ul>
+</li>
+
 	          <!-- <li>
                 <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
 	          </li> -->
