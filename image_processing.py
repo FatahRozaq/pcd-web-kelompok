@@ -298,3 +298,23 @@ def threshold(lower_thres, upper_thres):
     img_arr_copy[condition] = 255
     new_img = Image.fromarray(img_arr_copy)
     new_img.save("static/img/img_now.jpg")
+
+def binary_conversion():
+    # Load the image
+    img = Image.open("static/img/img_now.jpg")
+    
+    # Convert the image to grayscale
+    img_gray = img.convert('L')
+    
+    # Convert the grayscale image to a NumPy array
+    img_arr = np.array(img_gray)
+    
+    # Thresholding to convert to binary
+    threshold = 128  # You can adjust this threshold as needed
+    binary_arr = np.where(img_arr < threshold, 0, 255)
+    
+    # Create a new image from the binary array
+    binary_img = Image.fromarray(binary_arr.astype('uint8'))
+    
+    # Save the binary image
+    binary_img.save("static/img/img_now_binary.jpg")

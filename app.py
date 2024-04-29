@@ -195,6 +195,34 @@ def thresholding():
     image_processing.threshold(lower_thres, upper_thres)
     return render_template("uploaded.html", file_path="img/img_now.jpg")
 
+@app.route("/binary_conversion", methods=["POST"])
+@nocache
+def binary_conversion():
+    # Load the image
+    img = Image.open("static/img/img_now.jpg")
+    
+    # Convert the image to grayscale
+    img_gray = img.convert('L')
+    
+    # Convert the grayscale image to a NumPy array
+    img_arr = np.array(img_gray)
+    
+    # Thresholding to convert to binary
+    threshold = 128  # You can adjust this threshold as needed
+    binary_arr = np.where(img_arr < threshold, 0, 255)
+    
+    # Create a new image from the binary array
+    binary_img = Image.fromarray(binary_arr.astype('uint8'))
+    
+    # Save the binary image
+    binary_img.save("static/img/img_now_binary.jpg")
+    
+    # Update the file path to the binary image for display
+    file_path = "img/img_now_binary.jpg"
+    
+    return render_template("uploaded.html", file_path=file_path)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
