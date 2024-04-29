@@ -284,14 +284,12 @@ def histogram_equalizer():
     image_equalized = np.interp(img, range(0, 256), my_cdf)
     cv2.imwrite('static/img/img_now.jpg', image_equalized)
 
-
 def threshold(lower_thres, upper_thres):
     img = Image.open("static/img/img_now.jpg")
-    img_arr = np.asarray(img)
-    condition = np.logical_and(np.greater_equal(img_arr, lower_thres),
-                               np.less_equal(img_arr, upper_thres))
-    print(lower_thres, upper_thres)
-    img_arr.setflags(write=1)
-    img_arr[condition] = 255
-    new_img = Image.fromarray(img_arr)
+    img_arr = np.array(img)
+    img_arr_copy = img_arr.copy()  # Create a writable copy of the array
+    condition = np.logical_and(np.greater_equal(img_arr_copy, lower_thres),
+                               np.less_equal(img_arr_copy, upper_thres))
+    img_arr_copy[condition] = 255
+    new_img = Image.fromarray(img_arr_copy)
     new_img.save("static/img/img_now.jpg")
