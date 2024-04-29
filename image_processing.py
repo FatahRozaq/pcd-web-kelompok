@@ -313,3 +313,41 @@ def binary_conversion():
     
     # Save the binary image
     binary_img.save("static/img/img_now_binary.jpg")
+
+def count_fragments_hitung2():
+    # Load the image
+    img = cv2.imread("static/img/img_now.jpg")
+
+    # Convert the image to grayscale
+    img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    # Perform edge detection
+    edges = cv2.Canny(img_gray, 50, 150)
+
+    # Find contours
+    contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    # Menentukan luas area yang ingin dihtiugn per pecahannya
+    threshold_area = 1
+
+    # Count the number of fragments
+    fragment_count = 0
+    for contour in contours:
+        # Calculate contour area
+        area = cv2.contourArea(contour)
+
+        # Calculate enclosing circle radius
+        (x, y), radius = cv2.minEnclosingCircle(contour)
+
+        # Calculate circle area
+        circle_area = np.pi * radius**2
+
+        # Check if contour is a fragment
+        if area < circle_area and area > threshold_area:
+            fragment_count += 1
+
+    return fragment_count
+
+    
+
+

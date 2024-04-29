@@ -33,6 +33,13 @@
                             <button type="submit" class="btn btn-primary">Normal</button>
                         </form>
                       </li>
+
+                      <li>
+                        <form id="" action="{{ url_for('count_fragments') }}" method="POST" enctype="multipart/form-data">
+                            <button type="submit" class="btn btn-primary">Hitung</button>
+                        </form>
+                      </li>
+
 	                  <li>
                         <form id="" action="{{ url_for('grayscale') }}" method="POST" enctype="multipart/form-data">
                             <button type="submit" class="btn btn-primary">Grayscale</button>
@@ -165,7 +172,7 @@
                       </form>
                   </li>
                   <li>
-                      <form id="" action="{{ url_for('erosi') }}" method="POST" enctype="multipart/form-data">
+                      <form id="" action="{{ url_for('sharpening') }}" method="POST" enctype="multipart/form-data">
                           <button type="submit" class="btn btn-primary">Erosi</button>
                       </form>
                     </li>
@@ -237,7 +244,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h3>After</h3>
+                                <h3>Hasil</h3>
+                                {% if fragment_count %}
+                                  <h3>jumlah pecahan : {{ fragment_count }}</h1>
+                                {% endif %}
                                 <img class="img-fluid" src="{{ url_for('static', filename=file_path) }}" alt="image here">
                             </div>
                         </div>

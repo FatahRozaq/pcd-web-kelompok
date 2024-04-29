@@ -222,6 +222,12 @@ def binary_conversion():
     
     return render_template("uploaded.html", file_path=file_path)
 
+@app.route("/count_fragments", methods=["POST"])
+@nocache
+def count_fragments():
+    fragment_count = image_processing.count_fragments_hitung2()
+    return render_template("uploaded.html", fragment_count=fragment_count, file_path="img/img_now.jpg")
+
 
 
 if __name__ == '__main__':
