@@ -219,22 +219,17 @@ def edge_detection():
 
 
 def blur():
-    img = Image.open("static/img/img_now.jpg")
-    img_arr = np.asarray(img, dtype=np.int)
-    kernel = np.array(
-        [[0.0625, 0.125, 0.0625], [0.125, 0.25, 0.125], [0.0625, 0.125, 0.0625]])
-    new_arr = convolution(img_arr, kernel)
-    new_img = Image.fromarray(new_arr)
-    new_img.save("static/img/img_now.jpg")
-
+    img = cv2.imread("static/img/img_now.jpg")
+    blurred_img = cv2.GaussianBlur(img, (9, 9), 10)
+    cv2.imwrite("static/img/img_now.jpg", blurred_img)
 
 def sharpening():
-    img = Image.open("static/img/img_now.jpg")
-    img_arr = np.asarray(img, dtype=np.int)
-    kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
-    new_arr = convolution(img_arr, kernel)
-    new_img = Image.fromarray(new_arr)
-    new_img.save("static/img/img_now.jpg")
+    img = cv2.imread("static/img/img_now.jpg")
+    kernel = np.array([[-1, -1, -1],
+                       [-1, 9, -1],
+                       [-1, -1, -1]])
+    sharpened_img = cv2.filter2D(img, -1, kernel)
+    cv2.imwrite("static/img/img_now.jpg", sharpened_img)
 
 
 def histogram_rgb():
