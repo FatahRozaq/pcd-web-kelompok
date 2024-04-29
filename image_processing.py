@@ -314,7 +314,7 @@ def binary_conversion():
     # Save the binary image
     binary_img.save("static/img/img_now_binary.jpg")
 
-def count_fragments_hitung2():
+def hitung2():
     # Load the image
     img = cv2.imread("static/img/img_now.jpg")
 
@@ -349,5 +349,19 @@ def count_fragments_hitung2():
     return fragment_count
 
     
+def erosi():
+    img = cv2.imread("static/img/img_now.jpg", cv2.IMREAD_GRAYSCALE)  # Baca gambar dalam skala keabuan
+    # Definisikan kernel untuk erosi
+    kernel = np.ones((5,5), np.uint8)
+    # Lakukan operasi erosi
+    erosi_img = cv2.erode(img, kernel, iterations=1)
+    # Simpan gambar yang telah di-erosi
+    cv2.imwrite("static/img/img_now.jpg", erosi_img)
 
+def hitung4():
+    img = cv2.imread('static/img/img_now.jpg', 0)
+    _, thresh = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
+    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    num_boxes = len(contours)
+    return num_boxes
 

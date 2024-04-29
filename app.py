@@ -222,13 +222,23 @@ def binary_conversion():
     
     return render_template("uploaded.html", file_path=file_path)
 
-@app.route("/count_fragments", methods=["POST"])
+@app.route("/hitung2", methods=["POST"])
 @nocache
-def count_fragments():
-    fragment_count = image_processing.count_fragments_hitung2()
+def hitung2():
+    fragment_count = image_processing.hitung2()
     return render_template("uploaded.html", fragment_count=fragment_count, file_path="img/img_now.jpg")
 
+@app.route("/erosi", methods=["POST"])
+@nocache
+def erosi():
+    image_processing.erosi()
+    return render_template("uploaded.html", file_path="img/img_now.jpg")
 
+@app.route("/hitung4", methods=["POST"])
+@nocache
+def hitung4():
+    num_boxes = image_processing.hitung4()
+    return render_template("uploaded.html", file_path="img/img_now.jpg", num_boxes=num_boxes)
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

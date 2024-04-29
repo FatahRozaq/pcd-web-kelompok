@@ -33,24 +33,11 @@
                             <button type="submit" class="btn btn-primary">Normal</button>
                         </form>
                       </li>
-
-                      <li>
-                        <form id="" action="{{ url_for('count_fragments') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Hitung</button>
-                        </form>
-                      </li>
-
 	                  <li>
                         <form id="" action="{{ url_for('grayscale') }}" method="POST" enctype="multipart/form-data">
                             <button type="submit" class="btn btn-primary">Grayscale</button>
                         </form>
                       </li>
-                      <li>
-                        <form id="" action="{{ url_for('binary_conversion') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Binary</button>
-                        </form>
-                      </li>
-                      
                       <li>
                         <form id="" action="{{ url_for('zoomin') }}" method="POST" enctype="multipart/form-data">
                             <button type="submit" class="btn btn-primary">Zoom In</button>
@@ -160,6 +147,11 @@
                           <button type="submit" class="btn btn-primary">Sharpening</button>
                       </form>
                     </li>
+                    <li>
+                      <form id="" action="{{ url_for('brightness_substraction') }}" method="POST" enctype="multipart/form-data">
+                          <button type="submit" class="btn btn-primary">Gelap (-)</button>
+                      </form>
+                    </li>
                   <!-- Tambahkan submenu lainnya di sini sesuai kebutuhan -->
               </ul>
             </li>
@@ -172,7 +164,7 @@
                       </form>
                   </li>
                   <li>
-                      <form id="" action="{{ url_for('sharpening') }}" method="POST" enctype="multipart/form-data">
+                      <form id="" action="{{ url_for('erosi') }}" method="POST" enctype="multipart/form-data">
                           <button type="submit" class="btn btn-primary">Erosi</button>
                       </form>
                     </li>
@@ -187,29 +179,28 @@
                   <!-- Tambahkan submenu lainnya di sini sesuai kebutuhan -->
               </ul>
             </li>
-            <!-- Di dalam list-unstyled components -->
-<li>
-  <a href="#"><span class="fa fa-user mr-3"></span>Segmentasi</a>
-  <ul class="list-unstyled components">
-      <li>
-          <form id="" action="{{ url_for('thresholding') }}" method="POST" enctype="multipart/form-data">
-              <div class="form-group">
-                  <label for="lower_thres">Batas Bawah:</label>
-                  <input type="number" name="lower_thres" id="lower_thres" class="form-control" placeholder="0-255">
-              </div>
-              <div class="form-group">
-                  <label for="upper_thres">Batas Atas:</label>
-                  <input type="number" name="upper_thres" id="upper_thres" class="form-control" placeholder="0-255">
-              </div>
-              <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Thresholding</button>
-              </div>
-          </form>
-      </li>
-      <!-- Tambahkan submenu lainnya di sini sesuai kebutuhan -->
-  </ul>
-</li>
 
+            <li>
+              <a href="#"><span class="fa fa-user mr-3"></span>Hitung</a>
+              <ul class="list-unstyled components">
+                  <li>
+                      <form id="" action="{{ url_for('edge_detection') }}" method="POST" enctype="multipart/form-data">
+                          <button type="submit" class="btn btn-primary">Hitung 1</button>
+                      </form>
+                  </li>
+                  <li>
+                      <form id="" action="{{ url_for('hitung2') }}" method="POST" enctype="multipart/form-data">
+                          <button type="submit" class="btn btn-primary">Hitung 2</button>
+                      </form>
+                    </li>
+                    <li>
+                      <form id="count_boxes_form" action="{{ url_for('hitung4') }}" method="POST" enctype="multipart/form-data">
+                        <button type="submit" class="btn btn-primary">Hitung 4</button>
+                    </form>
+                    </li>
+                  <!-- Tambahkan submenu lainnya di sini sesuai kebutuhan -->
+              </ul>
+            </li>
 	          <!-- <li>
                 <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
 	          </li> -->
@@ -244,10 +235,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h3>Hasil</h3>
-                                {% if fragment_count %}
-                                  <h3>jumlah pecahan : {{ fragment_count }}</h1>
-                                {% endif %}
+                                <h3>After</h3>
+                                {% if hitung4 %}
+                        <h1>jumlah kotak : {{ hitung4 }}</h1>
+                        {% endif %}
                                 <img class="img-fluid" src="{{ url_for('static', filename=file_path) }}" alt="image here">
                             </div>
                         </div>
@@ -261,7 +252,18 @@
         <script src="{{ url_for('static', filename='js/popper.js') }}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-        
+        <script>
+          // Function to handle form submission
+          function handleFormSubmit(form) {
+              if (form.id === "count_boxes_form") {
+                  // Show the num_boxes_heading element
+                  document.getElementById("num_boxes_heading").style.display = "block";
+              } else {
+                  // Hide the num_boxes_heading element
+                  document.getElementById("num_boxes_heading").style.display = "none";
+              }
+          }
+      </script>
         <style>
             /* CSS for submenu */
             .list-unstyled.components ul {
